@@ -20,7 +20,11 @@ class Exercise(db.Model):
     equipment_needed = db.Column(db.Boolean, nullable=False, default=False)
 
     # One exercise will be apart of many workouts
-    workout_exercises = db.relationship("WorkoutExercise", back_populates="exercise", cascade="all, delete-orphan")
+    workout_exercises = db.relationship(
+        'WorkoutExercise',
+        back_populates='exercise',
+        cascade='all, delete-orphan'
+    )
 
     # Provide a method to skip through workout_exercises to get to a specific workout
     workouts = association_proxy('workout_exercises', 'workout')
@@ -62,7 +66,11 @@ class Workout(db.Model):
     notes = db.Column(db.Text)
 
     # One workout will be apart of many exercises
-    workout_exercises = db.relationship( "WorkoutExercise", back_populates="workout", cascade="all, delete-orphan")
+    workout_exercises = db.relationship(
+        'WorkoutExercise',
+        back_populates='workout',
+        cascade='all, delete-orphan'
+    )
 
     # Provide a method to skip through workout_exercises to get to a specific exercise
     exercises = association_proxy('workout_exercises', 'exercise')
